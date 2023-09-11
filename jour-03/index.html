@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic tac toe </title>
+</head>
+<body>
+    <h1>Tic tac toe </h1>
+    <p>Joueur actuel // class/Board.js
+
+        export default class Board {
+            constructor() {
+                this.grid = this.initializeBoard(); // Tableau 2D pour représenter le plateau de jeu
+                this.hasWinner = false; // Indique si une victoire a été obtenue
+            }
+        
+            initializeBoard() {
+                const rows = 3; // Nombre de lignes
+                const cols = 3; // Nombre de colonnes
+                const emptyCell = "-"; // Caractère pour représenter les cases vides
+        
+                // Créer un tableau 2D initialisé avec des cases vides
+                const board = [];
+                for (let i = 0; i < rows; i++) {
+                    const row = [];
+                    for (let j = 0; j < cols; j++) {
+                        row.push(emptyCell);
+                    }
+                    board.push(row);
+                }
+        
+                return board;
+            }
+        
+            displayBoard() {
+                const boardDiv = document.getElementById("board");
+                boardDiv.innerHTML = "";
+        
+                for (let i = 0; i < this.grid.length; i++) {
+                    const rowDiv = document.createElement("div");
+                    rowDiv.className = "row";
+        
+                    for (let j = 0; j < this.grid[i].length; j++) {
+                        const cellButton = document.createElement("button");
+                        cellButton.className = "case";
+                        cellButton.id = `btn-${i}-${j}`;
+                        cellButton.textContent = this.grid[i][j];
+        
+                        rowDiv.appendChild(cellButton);
+                    }
+        
+                    boardDiv.appendChild(rowDiv);
+                }
+            }
+        
+            placeMove(row, col, symbol) {
+                if (this.grid[row][col] === "-") {
+                    this.grid[row][col] = symbol;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        
+            checkVictory() {
+                // Logique pour vérifier les combinaisons gagnantes
+                // Vous devrez implémenter cette logique
+            }
+        
+            isFull() {
+                for (let i = 0; i < this.grid.length; i++) {
+                    for (let j = 0; j < this.grid[i].length; j++) {
+                        if (this.grid[i][j] === "-") {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+        
+            resetBoard() {
+                this.grid = this.initializeBoard();
+                this.hasWinner = false;
+                this.displayBoard();
+            }
+        
+            // Vous pouvez ajouter d'autres méthodes ou propriétés nécessaires pour votre jeu ici
+        }
+        : <span id="current-player">Joueur 1</span></p>
+    <p>Message : <span id="message"></span></p>
+    <p>Nombre de tours : <span id="turn">0</span></p>
+    <button id="play">Nouvelle Partie</button>
+    <div id="board">
+
+    </div>
+
+</body>
+</html>
